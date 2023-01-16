@@ -13,10 +13,9 @@ const Todos = db.define('todos', {
   isComplete: {type: BOOLEAN,
                 defaultValue: false,
                 field: "is_complete"},
-  userId: {type: DataTypes.INTEGER,
+  user_id: {type: DataTypes.INTEGER,
             allowNull: false,
-            field: "user_id",
-            references: {model: Users, key: "id"}},
+            field: "user_id"},
 });
 
 module.exports = Todos;

@@ -6,6 +6,10 @@ const db = require("./utils/database");
 const initModels = require('./models/init.models');
 const Users = require('./models/users.models');
 const Todos = require('./models/todos.models');
+const userRoutes = require('./routes/users.routes');
+const todosRoutes = require('./routes/todos.routes');
+const authRoutes = require('./routes/auth.routes');
+const cors = require('cors');
 
 db.authenticate()
 .then(() => console.log("Autenticacion exitosa"))
@@ -21,7 +25,12 @@ app.get('/', (req, res) => {
   
 });
 
-app.get('/users', async (req, res) => {
+app.use('/api/v1', userRoutes);
+app.use('/api/v1', todosRoutes);
+app.use('/api/v1', authRoutes);
+app.use(cors());
+
+/*app.get('/users', async (req, res) => {
   try{
     const result = await Users.findAll();
     res.status(200).json(result);
@@ -39,7 +48,7 @@ app.get("/users/:id", async (req, res) => {
     console.log(error);
   }
   
-});
+});*/
 
 app.get("/users/username/:username", async (req, res) => {
   try {
@@ -52,7 +61,7 @@ app.get("/users/username/:username", async (req, res) => {
 
 });
 
-app.post('/users', async (req, res) => {
+/*app.post('/users', async (req, res) => {
   try {
     const user = req.body;
     const result = await Users.create(user);
@@ -144,7 +153,7 @@ app.delete('/todos/:id', async (req, res) => {
   } catch (error) {
     res.status(400).json(error.message);
   }
-});
+});*/
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);

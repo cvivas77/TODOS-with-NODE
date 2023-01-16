@@ -15,7 +15,7 @@ const Users = db.define("users", {
           unique: true,
           validate: {isEmail: true}},
   password: {type: DataTypes.STRING,
-            allowNull: false},
+            allowNull: false}
 });
 
 module.exports = Users;
